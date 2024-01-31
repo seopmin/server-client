@@ -10,8 +10,17 @@ set(CMAKE_CXX_STANDARD          17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS        OFF) 
 
-find_package(Boost 1.84.0 REQUIRED COMPONENTS system regex thread)
-include_directories(${Boost_INCLUDE_DIRS})
+
+if(UNIX AND NOT APPLE)  # Ubuntu
+    find_package(Boost 1.84.0 REQUIRED COMPONENTS system regex thread)
+elseif(APPLE)  # macOS
+    find_package(Boost REQUIRED)
+endif()
+
+
+if(Boost_FOUND)
+    include_directories(${Boost_INCLUDE_DIRS})
+endif()
 
 set(EXECUTABLE_NAME exe)
 

@@ -1,1 +1,0 @@
-/usr/bin/c++     CMakeFiles/exe.dir/main.cc.o  -o exe  -Wl,-rpath,/usr/local/lib /usr/local/lib/libboost_system.so.1.84.0 /usr/local/lib/libboost_regex.so.1.84.0 /usr/local/lib/libboost_thread.so.1.84.0 -lpthread 
