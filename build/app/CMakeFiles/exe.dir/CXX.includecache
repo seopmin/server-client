@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/seopmin/study/backend/app/main.cc
+iostream
+-
+boost/asio.hpp
+-
+boost/asio/ts/buffer.hpp
+-
+boost/asio/ts/internet.hpp
+-
+
