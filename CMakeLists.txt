@@ -22,7 +22,9 @@ if(Boost_FOUND)
     include_directories(${Boost_INCLUDE_DIRS})
 endif()
 
+set(LIBRARY_NAME Library)
 set(EXECUTABLE_NAME exe)
 
+
 add_subdirectory(app)
-# add_subdirectory(src)
+add_subdirectory(src/lib)
