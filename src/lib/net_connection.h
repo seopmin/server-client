@@ -1,8 +1,8 @@
 #pragma once
 
-#include "net_common.hpp"
-#include "net_tsqueue.hpp"
-#include "net_message.hpp"
+#include "net_common.h"
+#include "net_tsqueue.h"
+#include "net_message.h"
 
 
 namespace olc

@@ -1,9 +1,7 @@
 set(LIBRARY_SOURCES
   "empty_source_file.cc")
 set(LIBRARY_HEADERS
-  # "net_common.hpp"
-  # "net_message.hpp"
-  "olc_net.hpp")
+  "olc_net.h")
 
 set(LIBRARY_INCLUDES
   "./")
