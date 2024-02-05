@@ -93,6 +93,7 @@ namespace olc
 			boost::asio::io_context m_context;
 			// ...but needs a thread of its own to execute its work commands
 			std::thread thrContext;
+
 			// The client has a single instance of a "connection" object, which handles data transfer
 			std::unique_ptr<connection<T>> m_connection;
 			

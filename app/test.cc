@@ -1,5 +1,5 @@
 #include <iostream>
-#include "olc_net.hpp"
+#include "olc_net.h"
 
 enum class CustomMsgTypes : uint32_t
 {
@@ -27,6 +27,8 @@ int main() {
   c = 99.0f;
 
   msg >> d >> c >> b >> a;
+
+  std::cout << a << " " << b << " " << c;
 
 
   return 0;

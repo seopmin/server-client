@@ -1,6 +1,8 @@
 set(EXE_SOURCES
+    # "test.cc"
     # "main.cc"
-    "SimpleClient.cc")
+    "SimpleClient.cc"
+    )
 
 add_executable(${EXECUTABLE_NAME} ${EXE_SOURCES}) 
 add_executable(server SimpleServer.cc)
