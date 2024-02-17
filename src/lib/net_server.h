@@ -39,7 +39,9 @@ namespace olc
 					WaitForClientConnection();
 
 					// Launch the asio context in its own thread
-					m_threadContext = std::thread([this]() { m_asioContext.run(); });
+					m_threadContext = std::thread([this]() { 
+						std::cout << "새로운 스레드 ID: " << std::this_thread::get_id() << std::endl;
+						m_asioContext.run(); });
 				}
 				catch (std::exception& e)
 				{
@@ -71,12 +73,14 @@ namespace olc
 				// Prime context with an instruction to wait until a socket connects. This
 				// is the purpose of an "acceptor" object. It will provide a unique socket
 				// for each incoming connection attempt
+				std::cout << "WaitForClientConnection 스레드 ID: " << std::this_thread::get_id() << std::endl;
 				m_asioAcceptor.async_accept(
 					[this](std::error_code ec, boost::asio::ip::tcp::socket socket)
 					{
 						// Triggered by incoming connection request
 						if (!ec)
 						{
+							std::cout << "after accpet 스레드 ID: " << std::this_thread::get_id() << std::endl;
 							// Display some useful(?) information
 							std::cout << "[SERVER] New Connection: " << socket.remote_endpoint() << "\n";
 
@@ -181,6 +185,7 @@ namespace olc
 			// Force server to respond to incoming messages
 			void Update(size_t nMaxMessages = -1, bool bWait = false)
 			{
+				std::cout << "Update 스레드 ID: " << std::this_thread::get_id() << std::endl;
 				if (bWait) m_qMessagesIn.wait();
 
 				// Process as many messages as you can up to the value

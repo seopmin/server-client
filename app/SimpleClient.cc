@@ -1,5 +1,5 @@
-
 #include <iostream>
+#include <queue>
 #include "olc_net.h"
 
 enum class CustomMsgTypes : uint32_t
@@ -34,6 +34,14 @@ public:
 		msg.header.id = CustomMsgTypes::MessageAll;		
 		Send(msg);
 	}
+
+	void TextMessageAll(std::string s)
+	{
+		olc::net::message<CustomMsgTypes> msg;
+		msg.header.id = CustomMsgTypes::MessageAll;
+		msg << s;
+		Send(msg);
+	}
 };
 
 
@@ -46,6 +54,24 @@ int main()
 	bool old_key[3] = { false, false, false };
 
 	bool bQuit = false;
+
+	std::queue<std::string> q;
+
+	std::string s;
+	std::thread m_threadContext;
+
+	try {
+		m_threadContext = std::thread([&]() {
+			while(1) {
+				std::cin >> s;
+				q.push(s);	
+			}
+		});
+	} catch(std::exception& e) {
+		std::cerr << "thread error: " << e.what() << '\n';
+	}
+
+
 	while (!bQuit)
 	{
 		// if (GetForegroundWindow() == GetConsoleWindow())
@@ -55,9 +81,15 @@ int main()
 		// 	key[2] = GetAsyncKeyState('3') & 0x8000;
 		// }
 
-		if (key[0] && !old_key[0]) c.PingServer();
-		if (key[1] && !old_key[1]) c.MessageAll();
-		if (key[2] && !old_key[2]) bQuit = true;
+		// if (key[0] && !old_key[0]) c.PingServer();
+		// if (key[1] && !old_key[1]) c.MessageAll();
+		// if (key[2] && !old_key[2]) bQuit = true;
+
+		if (q.size() > 0) {
+			c.MessageAll();
+			// c.TextMessageAll(q.front());
+			q.pop();
+		}
 
 		for (int i = 0; i < 3; i++) old_key[i] = key[i];
 
@@ -94,6 +126,8 @@ int main()
 					// Server has responded to a ping request	
 					uint32_t clientID;
 					msg >> clientID;
+					// std::string s;
+					// msg >> s;
 					std::cout << "Hello from [" << clientID << "]\n";
 				}
 				break;
@@ -107,6 +141,7 @@ int main()
 		}
 
 	}
+	if (m_threadContext.joinable()) m_threadContext.join();
 
 	return 0;
 }
