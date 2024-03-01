@@ -83,7 +83,7 @@ namespace olc
 			}
 
 			// Retrieve queue of messages from server
-			tsqueue<owned_message<T>>& Incoming()
+			tsqueue<owned_message<T>>& InComing()
 			{ 
 				return m_qMessagesIn;
 			}

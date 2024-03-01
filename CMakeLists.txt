@@ -23,7 +23,8 @@ if(Boost_FOUND)
 endif()
 
 set(LIBRARY_NAME Library)
-set(EXECUTABLE_NAME exe)
+set(EXECUTABLE_CLIENT_NAME client)
+set(EXECUTABLE_SERVER_NAME server)
 
 
 add_subdirectory(app)

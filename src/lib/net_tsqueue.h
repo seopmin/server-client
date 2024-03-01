@@ -91,6 +91,8 @@ namespace olc
 			{
 				while (empty())
 				{
+					std::cout << "wait 스레드 ID: " << std::this_thread::get_id() << std::endl;
+
 					std::unique_lock<std::mutex> ul(muxBlocking);
 					cvBlocking.wait(ul);
 				}

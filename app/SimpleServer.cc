@@ -69,7 +69,7 @@ int main()
 {
 	CustomServer server(60000); 
 	server.Start();
-
+	std::cout << "메인 스레드 ID: " << std::this_thread::get_id() << std::endl;
 	while (1)
 	{
 		server.Update(-1, true);

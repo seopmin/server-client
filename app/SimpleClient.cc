@@ -86,7 +86,10 @@ int main()
 		// if (key[2] && !old_key[2]) bQuit = true;
 
 		if (q.size() > 0) {
-			c.MessageAll();
+			if (q.front() == "ping")
+				c.PingServer();
+			if (q.front() == "a")
+				c.MessageAll();
 			// c.TextMessageAll(q.front());
 			q.pop();
 		}
@@ -95,11 +98,11 @@ int main()
 
 		if (c.IsConnected())
 		{
-			if (!c.Incoming().empty())
+			if (!c.InComing().empty())
 			{
 
 
-				auto msg = c.Incoming().pop_front().msg;
+				auto msg = c.InComing().pop_front().msg;
 
 				switch (msg.header.id)
 				{
