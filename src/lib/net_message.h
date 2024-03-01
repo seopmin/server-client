@@ -49,7 +49,7 @@ namespace olc
 			template<typename DataType>
 			friend message<T>& operator << (message<T>& msg, const DataType& data)
 			{
-				// Check that the type of the data being pushed is trivially copyable
+				// Check that the type of the data being pushed is trivially copyable, if it isn't standard layout, return error message(in compile time)
 				static_assert(std::is_standard_layout<DataType>::value, "Data is too complex to be pushed into vector");
 
 				// Cache current size of vector, as this will be the point we insert the data
