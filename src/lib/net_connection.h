@@ -33,17 +33,17 @@ namespace olc
 			{
 				m_nOwnerType = parent;
 
-				// // Construct validation check data
-				// if (m_nOwnerType == owner::server) {
-				// 	// Connection is Server -> Client, construct random data for the client
-				// 	// to transform and send back for validation
-				// 	m_nHandshakeOut = uint64_t(std::chrono::system_clock::now().time_since_epoch().count());
+				// Construct validation check data
+				if (m_nOwnerType == owner::server) {
+					// Connection is Server -> Client, construct random data for the client
+					// to transform and send back for validation
+					m_nHandshakeOut = uint64_t(std::chrono::system_clock::now().time_since_epoch().count());
 
-				// 	m_nHandshakeCheck = scramble(m_nHandshakeOut);
-				// } else {
-				// 	m_nHandshakeIn = 0;
-				// 	m_nHandshakeOut = 0;
-				// }
+					m_nHandshakeCheck = scramble(m_nHandshakeOut);
+				} else {
+					m_nHandshakeIn = 0;
+					m_nHandshakeOut = 0;
+				}
 			}
 
 			virtual ~connection()
@@ -64,16 +64,16 @@ namespace olc
 					if (m_socket.is_open())
 					{
 						id = uid;
-						ReadHeader();
+						// ReadHeader();
 
 						// A client has attempted to connect to the server, but we wish
 						// the client to first validate itself, so first write out the
 						// handshake data to be validated
-						// WriteValidation();
+						WriteValidation();
 
 						// Next, issue a task to sit and wait asynchronously for precisely
 						// the validation data sent back from the client
-						// ReadValidation(server);
+						ReadValidation(server);
 					}
 				}
 			}
@@ -89,11 +89,11 @@ namespace olc
 						{
 							if (!ec)
 							{
-								ReadHeader();
+								// ReadHeader();
 
 								// First thing server will do is send packet to be validated
 								// so wait for that and respond
-								// ReadValidation();
+								ReadValidation();
 							}
 						});
 				}

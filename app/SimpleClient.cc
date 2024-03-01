@@ -48,7 +48,8 @@ public:
 int main()
 {
 	CustomClient c;
-	c.Connect("127.0.0.1", 60000);
+	// c.Connect("127.0.0.1", 60000);
+	c.Connect("58.230.65.39", 80);
 
 	bool key[3] = { false, false, false };
 	bool old_key[3] = { false, false, false };
